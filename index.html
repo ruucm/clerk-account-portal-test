@@ -23,7 +23,11 @@
 
     <script>
       window.addEventListener('load', async function () {
-        await Clerk.load()
+        await Clerk.load({ 
+            localization: koKR,
+            signInForceRedirectUrl: "/dashboard",
+            signInFallbackRedirectUrl: "/dashboard"
+        })
     
         if (Clerk.user) {
           document.getElementById('app').innerHTML = `
@@ -32,7 +36,10 @@
     
           const userButtonDiv = document.getElementById('user-button')
     
-          Clerk.mountUserButton(userButtonDiv)
+          Clerk.mountUserButton(userButtonDiv, {
+            forceRedirectUrl: '/dashboard',
+            fallbackRedirectUrl: '/dashboard'
+          })
         } else {
           document.getElementById('app').innerHTML = `
             <div id="sign-in"></div>
